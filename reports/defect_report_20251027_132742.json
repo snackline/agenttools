@@ -1,0 +1,973 @@
+{
+  "timestamp": "2025-10-27 13:27:42",
+  "summary": {
+    "static_analysis": {
+      "total": 26,
+      "high": 11,
+      "medium": 10,
+      "low": 5
+    },
+    "external_tools": {
+      "ruff": 10,
+      "pylint": 7,
+      "mypy": 2,
+      "bandit": 0
+    },
+    "dynamic_analysis": {
+      "compile_errors": 0
+    },
+    "fixes": {
+      "total_fixed": 0,
+      "fixed_files": 5
+    },
+    "verification": {
+      "verified_files": 0,
+      "compile_errors": 0
+    }
+  },
+  "defects": [
+    {
+      "file": "models.py",
+      "line": 10,
+      "col": 4,
+      "severity": "HIGH",
+      "rule_id": "AST001",
+      "message": "dataclass 字段 tags 的默认值为可变对象，所有实例将共享。",
+      "snippet": "    tags: List[str] = []  # BUG: 可变默认值，所有实例共享同一列表"
+    },
+    {
+      "file": "models.py",
+      "line": 11,
+      "col": 4,
+      "severity": "MEDIUM",
+      "rule_id": "AST003",
+      "message": "dataclass 字段 created_at 的默认值为函数调用，该值在类定义时固定。",
+      "snippet": "    created_at: datetime = datetime.now()  # BUG: 导入时固定时间，所有实例相同"
+    },
+    {
+      "file": "models.py",
+      "line": 22,
+      "col": 5,
+      "severity": "HIGH",
+      "rule_id": "PY100",
+      "message": "使用了未定义的名称 'staticmethod'。",
+      "snippet": "    @staticmethod"
+    },
+    {
+      "file": "services.py",
+      "line": 30,
+      "col": 15,
+      "severity": "MEDIUM",
+      "rule_id": "AST002",
+      "message": "疑似使用 'is' 进行值比较，建议使用 '==' （is 仅用于 None/True/False）。",
+      "snippet": "            if t.id is task_id:"
+    },
+    {
+      "file": "services.py",
+      "line": 19,
+      "col": 0,
+      "severity": "MEDIUM",
+      "rule_id": "PY202",
+      "message": "在生成器上使用 max()，若序列为空会抛出 ValueError，建议加默认值。",
+      "snippet": "        next_id = max(t.id for t in tasks) + 1"
+    },
+    {
+      "file": "services.py",
+      "line": 42,
+      "col": 0,
+      "severity": "LOW",
+      "rule_id": "PY203",
+      "message": "list.remove() 要求参数为列表中的元素，而非索引。",
+      "snippet": "            tasks.remove(task_id)"
+    },
+    {
+      "file": "utils.py",
+      "line": 9,
+      "col": 38,
+      "severity": "HIGH",
+      "rule_id": "PY100",
+      "message": "使用了未定义的名称 'colour'。",
+      "snippet": "        status = \"✓\" if t.done else colour(\"x\", \"red\")"
+    },
+    {
+      "file": "app.py",
+      "line": 1,
+      "col": 1,
+      "severity": "LOW",
+      "rule_id": "RUFF-I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "snippet": "import argparse"
+    },
+    {
+      "file": "app.py",
+      "line": 66,
+      "col": 11,
+      "severity": "MEDIUM",
+      "rule_id": "RUFF-W292",
+      "message": "No newline at end of file",
+      "snippet": "    main()"
+    },
+    {
+      "file": "models.py",
+      "line": 1,
+      "col": 1,
+      "severity": "LOW",
+      "rule_id": "RUFF-I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "snippet": "from dataclasses import dataclass"
+    },
+    {
+      "file": "models.py",
+      "line": 35,
+      "col": 17,
+      "severity": "MEDIUM",
+      "rule_id": "RUFF-W292",
+      "message": "No newline at end of file",
+      "snippet": "        return t"
+    },
+    {
+      "file": "services.py",
+      "line": 1,
+      "col": 1,
+      "severity": "LOW",
+      "rule_id": "RUFF-I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "snippet": "from typing import List, Optional"
+    },
+    {
+      "file": "services.py",
+      "line": 51,
+      "col": 56,
+      "severity": "MEDIUM",
+      "rule_id": "RUFF-W292",
+      "message": "No newline at end of file",
+      "snippet": "        return [t for t in tasks if keyword in t.title]"
+    },
+    {
+      "file": "storage.py",
+      "line": 1,
+      "col": 1,
+      "severity": "LOW",
+      "rule_id": "RUFF-I001",
+      "message": "Import block is un-sorted or un-formatted",
+      "snippet": "import json"
+    },
+    {
+      "file": "storage.py",
+      "line": 28,
+      "col": 62,
+      "severity": "MEDIUM",
+      "rule_id": "RUFF-W292",
+      "message": "No newline at end of file",
+      "snippet": "            json.dump(tasks, f, ensure_ascii=False, indent=2)"
+    },
+    {
+      "file": "utils.py",
+      "line": 9,
+      "col": 37,
+      "severity": "HIGH",
+      "rule_id": "RUFF-F821",
+      "message": "Undefined name `colour`",
+      "snippet": "        status = \"✓\" if t.done else colour(\"x\", \"red\")"
+    },
+    {
+      "file": "utils.py",
+      "line": 11,
+      "col": 89,
+      "severity": "MEDIUM",
+      "rule_id": "RUFF-W292",
+      "message": "No newline at end of file",
+      "snippet": "        print(f\"{t.id:<3} {t.title:<22} {tag_str:<20} {status} {t.created_at:%Y-%m-%d}\")"
+    },
+    {
+      "file": "app.py",
+      "line": 40,
+      "col": 8,
+      "severity": "MEDIUM",
+      "rule_id": "PL-redefined-builtin",
+      "message": "Redefining built-in 'list'",
+      "snippet": "        list = pretty_print(tasks)"
+    },
+    {
+      "file": "app.py",
+      "line": 38,
+      "col": 16,
+      "severity": "HIGH",
+      "rule_id": "PL-unexpected-keyword-arg",
+      "message": "Unexpected keyword argument 'filter_tag' in method call",
+      "snippet": "        tasks = service.list_tasks(filter_tag=args.tag)"
+    },
+    {
+      "file": "app.py",
+      "line": 40,
+      "col": 8,
+      "severity": "HIGH",
+      "rule_id": "PL-assignment-from-no-return",
+      "message": "Assigning result of a function call, where the function has no return",
+      "snippet": "        list = pretty_print(tasks)"
+    },
+    {
+      "file": "app.py",
+      "line": 53,
+      "col": 13,
+      "severity": "HIGH",
+      "rule_id": "PL-unexpected-keyword-arg",
+      "message": "Unexpected keyword argument 'id' in method call",
+      "snippet": "        ok = service.delete_task(id=args.id)"
+    },
+    {
+      "file": "app.py",
+      "line": 53,
+      "col": 13,
+      "severity": "HIGH",
+      "rule_id": "PL-no-value-for-parameter",
+      "message": "No value for argument 'task_id' in method call",
+      "snippet": "        ok = service.delete_task(id=args.id)"
+    },
+    {
+      "file": "storage.py",
+      "line": 13,
+      "col": 12,
+      "severity": "MEDIUM",
+      "rule_id": "PL-unspecified-encoding",
+      "message": "Using open without explicitly specifying an encoding",
+      "snippet": "            open(self.path, \"w\").close()"
+    },
+    {
+      "file": "utils.py",
+      "line": 9,
+      "col": 38,
+      "severity": "HIGH",
+      "rule_id": "PL-undefined-variable",
+      "message": "Undefined variable 'colour'",
+      "snippet": "        status = \"✓\" if t.done else colour(\"x\", \"red\")"
+    },
+    {
+      "file": "storage.py",
+      "line": 14,
+      "col": 0,
+      "severity": "HIGH",
+      "rule_id": "MYPY",
+      "message": "Incompatible return value type (got \"None\", expected \"list[Task]\")  [return-value]",
+      "snippet": "            return None"
+    },
+    {
+      "file": "services.py",
+      "line": 42,
+      "col": 0,
+      "severity": "HIGH",
+      "rule_id": "MYPY",
+      "message": "Argument 1 to \"remove\" of \"list\" has incompatible type \"int\"; expected \"Task\"  [arg-type]",
+      "snippet": "            tasks.remove(task_id)"
+    }
+  ],
+  "external_tools_details": {
+    "ruff": {
+      "count": 10,
+      "findings": [
+        {
+          "cell": null,
+          "code": "I001",
+          "end_location": {
+            "column": 43,
+            "row": 4
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\app.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "import argparse\n\nfrom services import TaskService\nfrom storage import Storage\nfrom utils import parse_tags, pretty_print\n\n\n",
+                "end_location": {
+                  "column": 1,
+                  "row": 6
+                },
+                "location": {
+                  "column": 1,
+                  "row": 1
+                }
+              }
+            ],
+            "message": "Organize imports"
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          },
+          "message": "Import block is un-sorted or un-formatted",
+          "noqa_row": 1,
+          "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+        },
+        {
+          "cell": null,
+          "code": "W292",
+          "end_location": {
+            "column": 11,
+            "row": 66
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\app.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "\n",
+                "end_location": {
+                  "column": 11,
+                  "row": 66
+                },
+                "location": {
+                  "column": 11,
+                  "row": 66
+                }
+              }
+            ],
+            "message": "Add trailing newline"
+          },
+          "location": {
+            "column": 11,
+            "row": 66
+          },
+          "message": "No newline at end of file",
+          "noqa_row": 66,
+          "url": "https://docs.astral.sh/ruff/rules/missing-newline-at-end-of-file"
+        },
+        {
+          "cell": null,
+          "code": "I001",
+          "end_location": {
+            "column": 24,
+            "row": 3
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\models.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "from dataclasses import dataclass\nfrom datetime import datetime\nfrom typing import List\n\n\n",
+                "end_location": {
+                  "column": 1,
+                  "row": 5
+                },
+                "location": {
+                  "column": 1,
+                  "row": 1
+                }
+              }
+            ],
+            "message": "Organize imports"
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          },
+          "message": "Import block is un-sorted or un-formatted",
+          "noqa_row": 1,
+          "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+        },
+        {
+          "cell": null,
+          "code": "W292",
+          "end_location": {
+            "column": 17,
+            "row": 35
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\models.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "\n",
+                "end_location": {
+                  "column": 17,
+                  "row": 35
+                },
+                "location": {
+                  "column": 17,
+                  "row": 35
+                }
+              }
+            ],
+            "message": "Add trailing newline"
+          },
+          "location": {
+            "column": 17,
+            "row": 35
+          },
+          "message": "No newline at end of file",
+          "noqa_row": 35,
+          "url": "https://docs.astral.sh/ruff/rules/missing-newline-at-end-of-file"
+        },
+        {
+          "cell": null,
+          "code": "I001",
+          "end_location": {
+            "column": 28,
+            "row": 3
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\services.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "from typing import List, Optional\n\nfrom models import Task\nfrom storage import Storage\n\n\n",
+                "end_location": {
+                  "column": 1,
+                  "row": 5
+                },
+                "location": {
+                  "column": 1,
+                  "row": 1
+                }
+              }
+            ],
+            "message": "Organize imports"
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          },
+          "message": "Import block is un-sorted or un-formatted",
+          "noqa_row": 1,
+          "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+        },
+        {
+          "cell": null,
+          "code": "W292",
+          "end_location": {
+            "column": 56,
+            "row": 51
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\services.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "\n",
+                "end_location": {
+                  "column": 56,
+                  "row": 51
+                },
+                "location": {
+                  "column": 56,
+                  "row": 51
+                }
+              }
+            ],
+            "message": "Add trailing newline"
+          },
+          "location": {
+            "column": 56,
+            "row": 51
+          },
+          "message": "No newline at end of file",
+          "noqa_row": 51,
+          "url": "https://docs.astral.sh/ruff/rules/missing-newline-at-end-of-file"
+        },
+        {
+          "cell": null,
+          "code": "I001",
+          "end_location": {
+            "column": 24,
+            "row": 4
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\storage.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "import json\nimport os\nfrom typing import List\n\nfrom models import Task\n\n\n",
+                "end_location": {
+                  "column": 1,
+                  "row": 6
+                },
+                "location": {
+                  "column": 1,
+                  "row": 1
+                }
+              }
+            ],
+            "message": "Organize imports"
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          },
+          "message": "Import block is un-sorted or un-formatted",
+          "noqa_row": 1,
+          "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+        },
+        {
+          "cell": null,
+          "code": "W292",
+          "end_location": {
+            "column": 62,
+            "row": 28
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\storage.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "\n",
+                "end_location": {
+                  "column": 62,
+                  "row": 28
+                },
+                "location": {
+                  "column": 62,
+                  "row": 28
+                }
+              }
+            ],
+            "message": "Add trailing newline"
+          },
+          "location": {
+            "column": 62,
+            "row": 28
+          },
+          "message": "No newline at end of file",
+          "noqa_row": 28,
+          "url": "https://docs.astral.sh/ruff/rules/missing-newline-at-end-of-file"
+        },
+        {
+          "cell": null,
+          "code": "F821",
+          "end_location": {
+            "column": 43,
+            "row": 9
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\utils.py",
+          "fix": null,
+          "location": {
+            "column": 37,
+            "row": 9
+          },
+          "message": "Undefined name `colour`",
+          "noqa_row": 9,
+          "url": "https://docs.astral.sh/ruff/rules/undefined-name"
+        },
+        {
+          "cell": null,
+          "code": "W292",
+          "end_location": {
+            "column": 89,
+            "row": 11
+          },
+          "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\scan_ch71n_b2\\utils.py",
+          "fix": {
+            "applicability": "safe",
+            "edits": [
+              {
+                "content": "\n",
+                "end_location": {
+                  "column": 89,
+                  "row": 11
+                },
+                "location": {
+                  "column": 89,
+                  "row": 11
+                }
+              }
+            ],
+            "message": "Add trailing newline"
+          },
+          "location": {
+            "column": 89,
+            "row": 11
+          },
+          "message": "No newline at end of file",
+          "noqa_row": 11,
+          "url": "https://docs.astral.sh/ruff/rules/missing-newline-at-end-of-file"
+        }
+      ],
+      "stderr": ""
+    },
+    "pylint": {
+      "count": 7,
+      "findings": [
+        {
+          "type": "warning",
+          "module": "app",
+          "obj": "main",
+          "line": 40,
+          "column": 8,
+          "endLine": 40,
+          "endColumn": 12,
+          "path": "app.py",
+          "symbol": "redefined-builtin",
+          "message": "Redefining built-in 'list'",
+          "message-id": "W0622"
+        },
+        {
+          "type": "error",
+          "module": "app",
+          "obj": "main",
+          "line": 38,
+          "column": 16,
+          "endLine": 38,
+          "endColumn": 55,
+          "path": "app.py",
+          "symbol": "unexpected-keyword-arg",
+          "message": "Unexpected keyword argument 'filter_tag' in method call",
+          "message-id": "E1123"
+        },
+        {
+          "type": "error",
+          "module": "app",
+          "obj": "main",
+          "line": 40,
+          "column": 8,
+          "endLine": 40,
+          "endColumn": 34,
+          "path": "app.py",
+          "symbol": "assignment-from-no-return",
+          "message": "Assigning result of a function call, where the function has no return",
+          "message-id": "E1111"
+        },
+        {
+          "type": "error",
+          "module": "app",
+          "obj": "main",
+          "line": 53,
+          "column": 13,
+          "endLine": 53,
+          "endColumn": 44,
+          "path": "app.py",
+          "symbol": "unexpected-keyword-arg",
+          "message": "Unexpected keyword argument 'id' in method call",
+          "message-id": "E1123"
+        },
+        {
+          "type": "error",
+          "module": "app",
+          "obj": "main",
+          "line": 53,
+          "column": 13,
+          "endLine": 53,
+          "endColumn": 44,
+          "path": "app.py",
+          "symbol": "no-value-for-parameter",
+          "message": "No value for argument 'task_id' in method call",
+          "message-id": "E1120"
+        },
+        {
+          "type": "warning",
+          "module": "storage",
+          "obj": "Storage.load_tasks",
+          "line": 13,
+          "column": 12,
+          "endLine": 13,
+          "endColumn": 32,
+          "path": "storage.py",
+          "symbol": "unspecified-encoding",
+          "message": "Using open without explicitly specifying an encoding",
+          "message-id": "W1514"
+        },
+        {
+          "type": "error",
+          "module": "utils",
+          "obj": "pretty_print",
+          "line": 9,
+          "column": 38,
+          "endLine": 9,
+          "endColumn": 44,
+          "path": "utils.py",
+          "symbol": "undefined-variable",
+          "message": "Undefined variable 'colour'",
+          "message-id": "E0602"
+        }
+      ],
+      "stderr": ""
+    },
+    "mypy": {
+      "count": 2,
+      "findings": [
+        "storage.py:14: error: Incompatible return value type (got \"None\", expected \"list[Task]\")  [return-value]",
+        "services.py:42: error: Argument 1 to \"remove\" of \"list\" has incompatible type \"int\"; expected \"Task\"  [arg-type]"
+      ],
+      "stderr": ""
+    },
+    "bandit": {
+      "count": 0,
+      "findings": [],
+      "stderr": ""
+    },
+    "semgrep": {
+      "count": 0,
+      "findings": []
+    }
+  },
+  "dynamic_errors": [],
+  "fixes": [
+    {
+      "file": "models.py",
+      "path": "fixed_files\\models.py",
+      "fixed_content": "from dataclasses import dataclass\nfrom datetime import datetime\nfrom typing import List\n\n@dataclass\nclass Task:\n    id: int\n    title: str\n    done: bool = False\n    tags: List[str] = None  # 使用 None 避免可变默认参数\n    created_at: datetime = None  # 在 __post_init__ 中设置\n\n    def __post_init__(self):\n        if self.created_at is None:\n            self.created_at = datetime.now()\n\n    def to_dict(self):\n        return {\n            \"id\": self.id,\n            \"title\": self.title,\n            \"done\": self.done,  # 包含 done 字段\n            \"tags\": self.tags,\n            \"created_at\": self.created_at.isoformat(),\n        }\n\n    @classmethod\n    def from_dict(cls, d: dict) -> \"Task\":\n        t = cls(\n            id=d.get(\"id\", 0),\n            title=d.get(\"title\", \"\"),\n            done=d.get(\"done\", False),  # 键名正确\n            tags=d.get(\"tags\", []),\n            created_at=datetime.fromisoformat(d.get(\"createdAt\", datetime.now().isoformat())),  # 键名正确且解析已存在的 created_at\n        )\n        return t\n",
+      "original_issues": [
+        {
+          "file": "models.py",
+          "line": 10,
+          "severity": "HIGH",
+          "rule_id": "AST001",
+          "message": "dataclass 字段 tags 的默认值为可变对象，所有实例将共享。",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "models.py",
+          "line": 22,
+          "severity": "HIGH",
+          "rule_id": "PY100",
+          "message": "使用了未定义的名称 'staticmethod'。",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "models.py",
+          "line": 11,
+          "severity": "MEDIUM",
+          "rule_id": "AST003",
+          "message": "dataclass 字段 created_at 的默认值为函数调用，该值在类定义时固定。",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "models.py",
+          "line": 35,
+          "severity": "MEDIUM",
+          "rule_id": "RUFF-W292",
+          "message": "No newline at end of file",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "models.py",
+          "line": 1,
+          "severity": "LOW",
+          "rule_id": "RUFF-I001",
+          "message": "Import block is un-sorted or un-formatted",
+          "priority": "MEDIUM",
+          "suggested_fix": "请检查代码逻辑并修复"
+        }
+      ]
+    },
+    {
+      "file": "utils.py",
+      "path": "fixed_files\\utils.py",
+      "fixed_content": "def parse_tags(s: str):\n    # BUG: 标签约定为逗号分隔，这里却按空格拆分\n    return [x.strip() for x in s.split(\",\") if x.strip()]\n\ndef pretty_print(tasks):\n    print(\"ID  Title                   Tags                 Done Created At\")\n    for t in tasks:\n        status = \"✓\" if t.done else \"\\033[91m\"x\"\\033[0m\"\n        tag_str = \",\".join(t.tags)\n        print(f\"{t.id:<3} {t.title:<22} {tag_str:<20} {status} {t.created_at:%Y-%m-%d}\")\n",
+      "original_issues": [
+        {
+          "file": "utils.py",
+          "line": 9,
+          "severity": "HIGH",
+          "rule_id": "PY100",
+          "message": "使用了未定义的名称 'colour'。",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "utils.py",
+          "line": 9,
+          "severity": "HIGH",
+          "rule_id": "RUFF-F821",
+          "message": "Undefined name `colour`",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "utils.py",
+          "line": 9,
+          "severity": "HIGH",
+          "rule_id": "PL-undefined-variable",
+          "message": "Undefined variable 'colour'",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "utils.py",
+          "line": 11,
+          "severity": "MEDIUM",
+          "rule_id": "RUFF-W292",
+          "message": "No newline at end of file",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        }
+      ]
+    },
+    {
+      "file": "app.py",
+      "path": "fixed_files\\app.py",
+      "fixed_content": "import argparse\nfrom storage import Storage\nfrom services import TaskService\nfrom utils import parse_tags, pretty_print\n\ndef main():\n    parser = argparse.ArgumentParser(\"todo\")\n    sub = parser.add_subparsers(dest=\"command\")\n\n    p_add = sub.add_parser(\"add\", help=\"添加一个任务\")\n    p_add.add_argument(\"title\", help=\"任务标题\")\n    p_add.add_argument(\"--tags\", \"-t\", default=\"\", help=\"逗号分隔的标签\")\n\n    p_list = sub.add_parser(\"list\", help=\"列出任务\")\n    p_list.add_argument(\"--tag\", help=\"按标签过滤\")\n\n    p_done = sub.add_parser(\"done\", help=\"完成任务\")\n    p_done.add_argument(\"id\", type=int)\n\n    p_del = sub.add_parser(\"delete\", help=\"删除任务\")\n    p_del.add_argument(\"id\", type=int)\n\n    p_search = sub.add_parser(\"search\", help=\"搜索任务\")\n    p_search.add_argument(\"keyword\")\n\n    args = parser.parse_args()\n\n    storage = Storage(\"data/tasks.json\")\n    service = TaskService(storage)\n\n    if args.command == \"add\":\n        tags = parse_tags(args.tags)\n        task = service.add_task(args.title, tags)\n        print(\"已添加:\", task.title, \"ID=\", task.id)\n\n    elif args.command == \"list\":\n        tasks = service.list_tasks(filter_tag=args.tag)\n        pretty_print(tasks)\n\n    elif args.command == \"done\":\n        ok = service.complete_task(task_id=args.id)\n        if ok:\n            print(\"已完成\")\n        else:\n            print(\"未找到该ID\")\n\n    elif args.command == \"delete\":\n        ok = service.delete_task(task_id=args.id)\n        if ok:\n            print(\"已删除\")\n        else:\n            print(\"未找到该ID\")\n\n    elif args.command == \"search\":\n        results = service.search(args.keyword)\n        pretty_print(results)\n    else:\n        parser.print_help()\n\nif __name__ == \"__main__\":\n    main()\n",
+      "original_issues": [
+        {
+          "file": "app.py",
+          "line": 38,
+          "severity": "HIGH",
+          "rule_id": "PL-unexpected-keyword-arg",
+          "message": "Unexpected keyword argument 'filter_tag' in method call",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "app.py",
+          "line": 40,
+          "severity": "HIGH",
+          "rule_id": "PL-assignment-from-no-return",
+          "message": "Assigning result of a function call, where the function has no return",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "app.py",
+          "line": 53,
+          "severity": "HIGH",
+          "rule_id": "PL-unexpected-keyword-arg",
+          "message": "Unexpected keyword argument 'id' in method call",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "app.py",
+          "line": 53,
+          "severity": "HIGH",
+          "rule_id": "PL-no-value-for-parameter",
+          "message": "No value for argument 'task_id' in method call",
+          "priority": "CRITICAL",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "app.py",
+          "line": 66,
+          "severity": "MEDIUM",
+          "rule_id": "RUFF-W292",
+          "message": "No newline at end of file",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "app.py",
+          "line": 40,
+          "severity": "MEDIUM",
+          "rule_id": "PL-redefined-builtin",
+          "message": "Redefining built-in 'list'",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "app.py",
+          "line": 1,
+          "severity": "LOW",
+          "rule_id": "RUFF-I001",
+          "message": "Import block is un-sorted or un-formatted",
+          "priority": "MEDIUM",
+          "suggested_fix": "请检查代码逻辑并修复"
+        }
+      ]
+    },
+    {
+      "file": "storage.py",
+      "path": "fixed_files\\storage.py",
+      "fixed_content": "import json\nimport os\n\nfrom typing import List\nfrom models import Task\n\n\nclass Storage:\n    def __init__(self, path: str):\n        self.path = path\n\n    def load_tasks(self) -> List[Task]:\n        if not os.path.exists(self.path):\n            open(self.path, \"w\", encoding=\"utf-8\").close()\n            return []\n        with open(self.path, \"r\", encoding=\"utf-8\") as f:\n            data = f.read()\n        if not data.strip():\n            return []\n        raw = json.loads(data)\n        tasks = [Task(**task) for task in raw]\n        return tasks\n\n    def save_tasks(self, tasks: List[Task]) -> None:\n        with open(self.path, \"w\", encoding=\"utf-8\") as f:\n            json.dump([task.dict() for task in tasks], f, ensure_ascii=False, indent=2)\n",
+      "original_issues": [
+        {
+          "file": "storage.py",
+          "line": 14,
+          "severity": "HIGH",
+          "rule_id": "MYPY",
+          "message": "Incompatible return value type (got \"None\", expected \"list[Task]\")  [return-value]",
+          "priority": "CRITICAL",
+          "suggested_fix": "根据 mypy 提示修复类型不匹配或返回值契约问题"
+        },
+        {
+          "file": "storage.py",
+          "line": 28,
+          "severity": "MEDIUM",
+          "rule_id": "RUFF-W292",
+          "message": "No newline at end of file",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "storage.py",
+          "line": 13,
+          "severity": "MEDIUM",
+          "rule_id": "PL-unspecified-encoding",
+          "message": "Using open without explicitly specifying an encoding",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "storage.py",
+          "line": 1,
+          "severity": "LOW",
+          "rule_id": "RUFF-I001",
+          "message": "Import block is un-sorted or un-formatted",
+          "priority": "MEDIUM",
+          "suggested_fix": "请检查代码逻辑并修复"
+        }
+      ]
+    },
+    {
+      "file": "services.py",
+      "path": "fixed_files\\services.py",
+      "fixed_content": "from typing import List, Optional\nfrom models import Task\nfrom storage import Storage\n\nclass TaskService:\n    def __init__(self, storage: Storage):\n        self.storage = storage\n\n    def list_tasks(self, filter_by_tag: Optional[str] = None) -> List[Task]:\n        tasks = self.storage.load_tasks() or []\n        if filter_by_tag:\n            tasks = [t for t in tasks if filter_by_tag in t.tags]\n        return tasks\n\n    def add_task(self, title: str, tags: List[str]) -> Task:\n        tasks = self.storage.load_tasks() or []\n        next_id = max((t.id for t in tasks), default=0) + 1\n        task = Task(id=next_id, title=title, tags=tags)\n        tasks.append(task)\n        self.storage.save_tasks(tasks)\n        return task\n\n    def complete_task(self, task_id: int) -> bool:\n        tasks = self.storage.load_tasks() or []\n        updated = False\n        for t in tasks:\n            if t.id == task_id:\n                t.done = True\n                updated = True\n                break\n        if updated:\n            self.storage.save_tasks(tasks)\n        return updated\n\n    def delete_task(self, task_id: int) -> bool:\n        tasks = self.storage.load_tasks() or []\n        try:\n            for i, task in enumerate(tasks):\n                if task.id == task_id:\n                    del tasks[i]\n                    break\n            self.storage.save_tasks(tasks)\n            return True\n        except ValueError:\n            return False\n\n    def search(self, keyword: str) -> List[Task]:\n        tasks = self.storage.load_tasks() or []\n        return [t for t in tasks if keyword.lower() in t.title.lower()]\n",
+      "original_issues": [
+        {
+          "file": "services.py",
+          "line": 42,
+          "severity": "HIGH",
+          "rule_id": "MYPY",
+          "message": "Argument 1 to \"remove\" of \"list\" has incompatible type \"int\"; expected \"Task\"  [arg-type]",
+          "priority": "CRITICAL",
+          "suggested_fix": "根据 mypy 提示修复类型不匹配或返回值契约问题"
+        },
+        {
+          "file": "services.py",
+          "line": 30,
+          "severity": "MEDIUM",
+          "rule_id": "AST002",
+          "message": "疑似使用 'is' 进行值比较，建议使用 '==' （is 仅用于 None/True/False）。",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "services.py",
+          "line": 19,
+          "severity": "MEDIUM",
+          "rule_id": "PY202",
+          "message": "在生成器上使用 max()，若序列为空会抛出 ValueError，建议加默认值。",
+          "priority": "HIGH",
+          "suggested_fix": "将 print 语句改为 print() 函数"
+        },
+        {
+          "file": "services.py",
+          "line": 51,
+          "severity": "MEDIUM",
+          "rule_id": "RUFF-W292",
+          "message": "No newline at end of file",
+          "priority": "HIGH",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "services.py",
+          "line": 42,
+          "severity": "LOW",
+          "rule_id": "PY203",
+          "message": "list.remove() 要求参数为列表中的元素，而非索引。",
+          "priority": "MEDIUM",
+          "suggested_fix": "请检查代码逻辑并修复"
+        },
+        {
+          "file": "services.py",
+          "line": 1,
+          "severity": "LOW",
+          "rule_id": "RUFF-I001",
+          "message": "Import block is un-sorted or un-formatted",
+          "priority": "MEDIUM",
+          "suggested_fix": "请检查代码逻辑并修复"
+        }
+      ]
+    }
+  ],
+  "verification": []
+}

@@ -1,0 +1,157 @@
+{
+  "before": {
+    "static_builtin": [
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 65,
+        "col": 0,
+        "severity": "HIGH",
+        "rule_id": "PY000",
+        "message": "语法错误：Missing parentheses in call to 'print'. Did you mean print(...)?",
+        "snippet": "    print \"加法同态性质验证成功\""
+      },
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 10,
+        "col": 0,
+        "severity": "HIGH",
+        "rule_id": "PY201",
+        "message": "检测到 Python 2 的 xrange()，在 Python 3 中应改为 range()。",
+        "snippet": "    for x in xrange(1, m):"
+      },
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 35,
+        "col": 0,
+        "severity": "HIGH",
+        "rule_id": "PY201",
+        "message": "检测到 Python 2 的 xrange()，在 Python 3 中应改为 range()。",
+        "snippet": "    for i in xrange(2, int(num ** 0.5) + 1):"
+      },
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 71,
+        "col": 0,
+        "severity": "HIGH",
+        "rule_id": "PY201",
+        "message": "检测到 Python 2 的 xrange()，在 Python 3 中应改为 range()。",
+        "snippet": "    votes = [random.randint(0, 1) for _ in xrange(num_voters)]"
+      },
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 65,
+        "col": 0,
+        "severity": "MEDIUM",
+        "rule_id": "PY202",
+        "message": "检测到 Python 2 的 print 语句，需改为 print(...)。",
+        "snippet": "    print \"加法同态性质验证成功\""
+      },
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 75,
+        "col": 0,
+        "severity": "HIGH",
+        "rule_id": "PY030",
+        "message": "圆括号 数量不匹配（可能未闭合或文件被截断）。",
+        "snippet": "        encrypted_total = (encrypted_total * encrypted_"
+      },
+      {
+        "file": "D:/python_work/pythonProject2\\main.py",
+        "line": 75,
+        "col": 0,
+        "severity": "HIGH",
+        "rule_id": "PY033",
+        "message": "文件末行看起来不完整（疑似被截断或表达式未结束）。",
+        "snippet": "        encrypted_total = (encrypted_total * encrypted_"
+      }
+    ],
+    "external": {
+      "ruff": {
+        "count": 2,
+        "findings": [
+          {
+            "cell": null,
+            "code": "invalid-syntax",
+            "end_location": {
+              "column": 23,
+              "row": 65
+            },
+            "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\defectscan_qrz7ppeb\\main.py",
+            "fix": null,
+            "location": {
+              "column": 11,
+              "row": 65
+            },
+            "message": "Simple statements must be separated by newlines or semicolons",
+            "noqa_row": null,
+            "url": null
+          },
+          {
+            "cell": null,
+            "code": "invalid-syntax",
+            "end_location": {
+              "column": 56,
+              "row": 75
+            },
+            "filename": "C:\\Users\\dell\\AppData\\Local\\Temp\\defectscan_qrz7ppeb\\main.py",
+            "fix": null,
+            "location": {
+              "column": 56,
+              "row": 75
+            },
+            "message": "unexpected EOF while parsing",
+            "noqa_row": null,
+            "url": null
+          }
+        ]
+      },
+      "bandit": {
+        "count": 0,
+        "findings": []
+      },
+      "mypy": {
+        "count": 1,
+        "findings": [
+          "main.py:65: error: Missing parentheses in call to 'print'. Did you mean print(...)?  [syntax]"
+        ]
+      }
+    },
+    "dynamic": {
+      "py_compile": [
+        {
+          "file": "C:\\Users\\dell\\AppData\\Local\\Temp\\defectscan_qrz7ppeb\\main.py",
+          "error": "  File \"C:\\Users\\dell\\AppData\\Local\\Temp\\defectscan_qrz7ppeb\\main.py\", line 65\n    print \"加法同态性质验证成功\"\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?\n"
+        }
+      ],
+      "pytest": {
+        "skipped": true,
+        "reason": "no tests discovered"
+      }
+    }
+  },
+  "after": {
+    "dynamic": {
+      "py_compile": [
+        {
+          "file": "C:\\Users\\dell\\AppData\\Local\\Temp\\agentfix_50kamkbx\\fixed_code_0.py",
+          "error": "  File \"C:\\Users\\dell\\AppData\\Local\\Temp\\agentfix_50kamkbx\\fixed_code_0.py\", line 2\n    - **位置**: main.py:65\n      ^^\nSyntaxError: invalid syntax\n"
+        },
+        {
+          "file": "C:\\Users\\dell\\AppData\\Local\\Temp\\agentfix_50kamkbx\\main.py",
+          "error": "  File \"C:\\Users\\dell\\AppData\\Local\\Temp\\agentfix_50kamkbx\\main.py\", line 3\n    - **问题描述**: 表达式未结束，圆括号数量不匹配\n                      ^\nSyntaxError: invalid character '，' (U+FF0C)\n"
+        }
+      ],
+      "pytest": {
+        "skipped": true,
+        "reason": "no tests discovered"
+      }
+    }
+  },
+  "extra": {
+    "applied_files": [
+      "fixed_code_0.py",
+      "main.py"
+    ]
+  },
+  "ts": 1760443822
+}
